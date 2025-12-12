@@ -367,20 +367,14 @@ export const InvoiceGenerator: React.FC = () => {
                 </div>
 
                 {/* Footer Notes */}
-                <div className="invoice-footer-row grid grid-cols-1 md:grid-cols-2 gap-8 border-t-2 border-slate-100 pt-8 print:gap-4 print:pt-4">
-                    <div className="invoice-col-left">
+                <div className="invoice-footer-row border-t-2 border-slate-100 pt-8 print:pt-4">
+                    <div className="w-full">
                         <h4 className="font-bold text-slate-900 mb-2 text-sm uppercase">Terms & Notes</h4>
                          <p className="text-sm text-slate-600 leading-relaxed whitespace-pre-wrap">
                             {clientDetails.notes || "Payment is due within 14 days of invoice date. Thank you for your business!"}
                         </p>
                     </div>
-                    <div className="invoice-col-right md:text-right">
-                        <h4 className="font-bold text-slate-900 mb-2 text-sm uppercase">Bank Details</h4>
-                        <p className="text-sm text-slate-600">Bank Name: HDFC Bank</p>
-                        <p className="text-sm text-slate-600">Account Name: HR Crew Productions</p>
-                        <p className="text-sm text-slate-600">Account No: XXXXXXXXXX</p>
-                        <p className="text-sm text-slate-600">IFSC: HDFC000XXXX</p>
-                    </div>
+                    {/* Bank details removed */}
                 </div>
 
                 {/* Print Button (Hidden when printing) */}
