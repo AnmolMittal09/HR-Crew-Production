@@ -6,13 +6,17 @@ const predefinedItems = [
   { group: "Services", label: "Music Production (Full Track)", rate: 25000 },
   { group: "Services", label: "Video Editing (Day Rate)", rate: 8000 },
   { group: "Services", label: "Color Grading (Project)", rate: 12000 },
-  { group: "Equipment", label: "Sony FX3 Camera Kit (Day)", rate: 4500 },
-  { group: "Equipment", label: "Sony A7S III Camera Kit (Day)", rate: 3500 },
-  { group: "Equipment", label: "G-Master Lens 24-70mm GM II (Day)", rate: 1500 },
-  { group: "Equipment", label: "G-Master Lens 70-200mm GM II (Day)", rate: 1800 },
-  { group: "Equipment", label: "DJI RS3 Pro Gimbal (Day)", rate: 2000 },
-  { group: "Equipment", label: "Aputure 300d II Light Kit (Day)", rate: 1200 },
-  { group: "Equipment", label: "Wireless Mic Kit (Day)", rate: 1000 },
+  { group: "Services", label: "Assistant (Day)", rate: 1500 },
+  { group: "Equipment", label: "Sony FX6", rate: 3500 },
+  { group: "Equipment", label: "Sony 24mm f1.4", rate: 1000 },
+  { group: "Equipment", label: "Sony 50mm f1.4", rate: 1000 },
+  { group: "Equipment", label: "Sony 85mm f1.4", rate: 1000 },
+  { group: "Equipment", label: "Ronin RS4 Pro", rate: 1300 },
+  { group: "Equipment", label: "CPL Filter", rate: 400 },
+  { group: "Equipment", label: "Tripod", rate: 300 },
+  { group: "Equipment", label: "Sony FX3 Camera Kit", rate: 4500 },
+  { group: "Equipment", label: "Aputure 300d II Light Kit", rate: 1200 },
+  { group: "Equipment", label: "Wireless Mic Kit", rate: 1000 },
 ];
 
 export const InvoiceGenerator: React.FC = () => {
@@ -27,9 +31,9 @@ export const InvoiceGenerator: React.FC = () => {
   });
 
   const [lineItems, setLineItems] = useState<LineItem[]>([
-    { id: 1, description: 'Music Video Production (Day Rate)', quantity: 2, rate: 15000 },
-    { id: 2, description: 'Sony FX3 Camera Kit Rental', quantity: 2, rate: 4500 },
-    { id: 3, description: 'DJI RS3 Pro Gimbal Rental', quantity: 2, rate: 2000 }
+    { id: 1, description: 'Sony FX6', quantity: 1, rate: 3500 },
+    { id: 2, description: 'Sony 24mm f1.4', quantity: 1, rate: 1000 },
+    { id: 3, description: 'Ronin RS4 Pro', quantity: 1, rate: 1300 }
   ]);
 
   const [taxRate, setTaxRate] = useState<number>(18);
