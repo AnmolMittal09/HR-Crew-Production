@@ -289,12 +289,12 @@ export const InvoiceGenerator: React.FC = () => {
               >
                 
                 {/* Header */}
-                <div className="flex flex-col md:flex-row justify-between items-start mb-12 border-b-2 border-slate-900 pb-8 print:mb-8 print:pb-4">
-                  <div className="mb-6 md:mb-0">
+                <div className="invoice-header-row flex flex-col md:flex-row justify-between items-start mb-12 border-b-2 border-slate-900 pb-8 print:mb-6 print:pb-4">
+                  <div className="invoice-col-left mb-6 md:mb-0">
                     <h1 className="text-5xl font-extrabold text-slate-900 mb-2 tracking-tighter">HR CREW</h1>
                     <p className="text-sm font-bold text-slate-500 tracking-[0.3em] uppercase">Productions</p>
                   </div>
-                  <div className="md:text-right">
+                  <div className="invoice-col-right md:text-right">
                     <h2 className="text-4xl font-light text-indigo-600 uppercase mb-2 print:text-black">{docType}</h2>
                     <div className="text-slate-500 space-y-1">
                         <p><span className="font-semibold">ID:</span> #{Math.floor(Math.random() * 10000)}</p>
@@ -304,8 +304,8 @@ export const InvoiceGenerator: React.FC = () => {
                 </div>
 
                 {/* Addresses */}
-                <div className="flex flex-col md:flex-row justify-between mb-16 gap-12 print:mb-8 print:gap-8">
-                  <div className="flex-1">
+                <div className="invoice-address-row flex flex-col md:flex-row justify-between mb-16 gap-12 print:mb-6 print:gap-8">
+                  <div className="invoice-col-left flex-1">
                     <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4 border-b border-slate-200 pb-2">From</h3>
                     <div className="text-slate-800 space-y-1">
                         <p className="font-bold text-lg">HR Crew Productions</p>
@@ -314,7 +314,7 @@ export const InvoiceGenerator: React.FC = () => {
                         <p className="mt-2 text-sm"><span className="font-semibold">Ph:</span> 7048998256, 9717155406</p>
                     </div>
                   </div>
-                  <div className="flex-1 md:text-right">
+                  <div className="invoice-col-right flex-1 md:text-right">
                     <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4 border-b border-slate-200 pb-2">Bill To</h3>
                     <div className="text-slate-800 space-y-1">
                         <p className="font-bold text-lg">{clientDetails.name || 'Client Name'}</p>
@@ -325,7 +325,7 @@ export const InvoiceGenerator: React.FC = () => {
                 </div>
 
                 {/* Table */}
-                <div className="mb-12 print:mb-8">
+                <div className="mb-12 print:mb-6">
                   <table className="w-full">
                     <thead>
                       <tr className="border-b-2 border-slate-900">
@@ -349,17 +349,17 @@ export const InvoiceGenerator: React.FC = () => {
                 </div>
 
                 {/* Totals */}
-                <div className="flex justify-end mb-16 print:mb-8">
-                  <div className="w-full md:w-5/12 space-y-4">
-                    <div className="flex justify-between text-slate-600 border-b border-slate-100 pb-2">
+                <div className="invoice-totals-container flex justify-end mb-16 print:mb-6">
+                  <div className="invoice-totals-box w-full md:w-5/12 space-y-4">
+                    <div className="invoice-total-row flex justify-between text-slate-600 border-b border-slate-100 pb-2">
                       <span className="font-medium">Subtotal</span>
                       <span>₹{subtotal.toFixed(2)}</span>
                     </div>
-                    <div className="flex justify-between text-slate-600 border-b border-slate-100 pb-2">
+                    <div className="invoice-total-row flex justify-between text-slate-600 border-b border-slate-100 pb-2">
                       <span className="font-medium">Tax ({taxRate}%)</span>
                       <span>₹{taxAmount.toFixed(2)}</span>
                     </div>
-                    <div className="flex justify-between text-2xl font-bold text-slate-900 pt-2">
+                    <div className="invoice-total-row invoice-grand-total flex justify-between text-2xl font-bold text-slate-900 pt-2">
                       <span>Total</span>
                       <span>₹{grandTotal.toFixed(2)}</span>
                     </div>
@@ -367,14 +367,14 @@ export const InvoiceGenerator: React.FC = () => {
                 </div>
 
                 {/* Footer Notes */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 border-t-2 border-slate-100 pt-8">
-                    <div>
+                <div className="invoice-footer-row grid grid-cols-1 md:grid-cols-2 gap-8 border-t-2 border-slate-100 pt-8 print:gap-4 print:pt-4">
+                    <div className="invoice-col-left">
                         <h4 className="font-bold text-slate-900 mb-2 text-sm uppercase">Terms & Notes</h4>
                          <p className="text-sm text-slate-600 leading-relaxed whitespace-pre-wrap">
                             {clientDetails.notes || "Payment is due within 14 days of invoice date. Thank you for your business!"}
                         </p>
                     </div>
-                    <div className="md:text-right">
+                    <div className="invoice-col-right md:text-right">
                         <h4 className="font-bold text-slate-900 mb-2 text-sm uppercase">Bank Details</h4>
                         <p className="text-sm text-slate-600">Bank Name: HDFC Bank</p>
                         <p className="text-sm text-slate-600">Account Name: HR Crew Productions</p>

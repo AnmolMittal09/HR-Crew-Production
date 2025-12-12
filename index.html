@@ -15,29 +15,29 @@
       @media print {
         @page { 
           size: A4; 
-          margin: 10mm; /* Moderate margin for printer safety areas */
+          margin: 1.5cm; /* Standard professional margin */
         }
         
         body {
           margin: 0;
           padding: 0;
           background-color: white !important;
-          color: black !important;
+          color: #111 !important;
           -webkit-print-color-adjust: exact;
           print-color-adjust: exact;
+          font-size: 10pt; /* Standard readable font size */
         }
 
-        /* Hide all UI elements */
-        body > *:not(#root) {
-          display: none;
-        }
-
-        /* Hide app navigation and other sections */
-        nav, footer, section:not(#invoice-tool), #invoice-tool > div > div > div:first-child, #invoice-tool > div > div > div:nth-child(2) {
+        /* HIDE UI ELEMENTS */
+        body > *:not(#root) { display: none; }
+        nav, footer, section:not(#invoice-tool), 
+        #invoice-tool > div > div > div:first-child, /* Tool title */
+        #invoice-tool > div > div > div:nth-child(2) /* Editor container */
+        {
             display: none !important;
         }
         
-        /* Specifically target the preview within the React app structure */
+        /* RESET CONTAINER LAYOUTS */
         #root, #invoice-tool, .container, .max-w-4xl {
             width: 100% !important;
             max-width: 100% !important;
@@ -50,65 +50,102 @@
             overflow: visible !important;
         }
 
-        /* Ensure the preview div is the only thing visible and formatted correctly */
+        /* INVOICE PREVIEW CONTAINER */
         #invoice-preview {
-          display: block !important;
-          visibility: visible !important;
-          position: relative !important;
-          width: 100% !important;
-          max-width: 100% !important;
-          min-height: auto !important;
-          margin: 0 !important;
-          padding: 0 !important;
-          box-shadow: none !important;
-          background: white !important;
-          border: none !important;
+            display: block !important;
+            visibility: visible !important;
+            position: relative !important;
+            width: 100% !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            box-shadow: none !important;
+            background: white !important;
+            border: none !important;
         }
 
-        /* Hide the parent containers of the preview to avoid whitespace issues */
-        #invoice-tool {
-            background-color: white !important;
+        /* FORCE ROW LAYOUTS (Override Tailwind Mobile Stacking) */
+        .invoice-header-row, 
+        .invoice-address-row, 
+        .invoice-footer-row {
+            display: flex !important;
+            flex-direction: row !important;
+            justify-content: space-between !important;
+            gap: 2rem !important;
         }
+
+        .invoice-col-left { text-align: left !important; flex: 1; }
+        .invoice-col-right { text-align: right !important; flex: 1; }
+
+        /* TYPOGRAPHY */
+        h1 { font-size: 24pt !important; line-height: 1.2 !important; margin-bottom: 5px !important; color: #000 !important; }
+        h2 { font-size: 16pt !important; color: #333 !important; text-transform: uppercase; letter-spacing: 2px; }
+        h3 { font-size: 9pt !important; color: #666 !important; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px !important; border-bottom: 1px solid #ddd; padding-bottom: 2px; }
+        p, div { color: #222 !important; line-height: 1.4; }
         
-        /* Typography optimizations for print */
-        h1, h2, h3, p, td, th, span, div {
-            color: #000 !important; /* Force black text */
-        }
-
-        /* Table styling */
+        /* TABLE STYLING */
         table {
             width: 100% !important;
             border-collapse: collapse !important;
-            font-size: 11pt !important;
+            margin-top: 2rem !important;
+            margin-bottom: 2rem !important;
+            font-size: 10pt !important;
         }
         
-        th {
-            background-color: #f3f4f6 !important; /* Light gray for headers */
+        thead th {
+            background-color: transparent !important;
+            color: #000 !important;
             border-bottom: 2px solid #000 !important;
-            padding-top: 8px !important;
-            padding-bottom: 8px !important;
+            padding: 8px 0 !important;
+            text-transform: uppercase;
+            font-size: 9pt !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.5px;
         }
 
-        td {
-            border-bottom: 1px solid #ddd !important;
-            padding-top: 8px !important;
-            padding-bottom: 8px !important;
+        tbody td {
+            border-bottom: 1px solid #eee !important;
+            padding: 10px 0 !important;
+            vertical-align: top;
+        }
+
+        /* Alignments */
+        th:nth-child(1), td:nth-child(1) { text-align: left; width: 50%; } /* Desc */
+        th:nth-child(2), td:nth-child(2) { text-align: center; width: 10%; } /* Qty */
+        th:nth-child(3), td:nth-child(3) { text-align: right; width: 20%; } /* Rate */
+        th:nth-child(4), td:nth-child(4) { text-align: right; width: 20%; } /* Amount */
+
+        /* TOTALS SECTION */
+        .invoice-totals-container {
+            display: flex !important;
+            justify-content: flex-end !important;
+            break-inside: avoid;
         }
         
-        /* Utility overrides */
-        .print\:hidden {
-            display: none !important;
+        .invoice-totals-box {
+            width: 40% !important;
         }
         
-        .print\:text-black {
-            color: black !important;
+        .invoice-total-row {
+            display: flex justify-between;
+            padding: 4px 0;
+            border-bottom: 1px solid #eee;
         }
         
-        /* Ensure background colors (like striping) print if desired, or remove them */
-        .bg-slate-50, .bg-slate-100, .bg-slate-200 {
-            background-color: #f9fafb !important;
+        .invoice-grand-total {
+            border-top: 2px solid #000 !important;
+            border-bottom: double 3px #000 !important;
+            padding: 8px 0 !important;
+            margin-top: 8px !important;
+            font-weight: bold !important;
+            font-size: 12pt !important;
         }
-      }
+
+        /* UTILITIES */
+        .print\:hidden { display: none !important; }
+        
+        /* Fix colors for backgrounds if needed */
+        .bg-white { background: white !important; }
+    }
     </style>
   <script type="importmap">
 {
