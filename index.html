@@ -10,35 +10,103 @@
       body {
         font-family: 'Inter', sans-serif;
       }
-      /* specific print styles to hide UI elements and show only the invoice */
+      
+      /* Enhanced Print Styles */
       @media print {
-        @page { margin: 0; }
-        body * {
-          visibility: hidden;
+        @page { 
+          size: A4; 
+          margin: 10mm; /* Moderate margin for printer safety areas */
         }
-        #invoice-preview, #invoice-preview * {
-          visibility: visible;
-        }
-        #invoice-preview {
-          position: absolute;
-          left: 0;
-          top: 0;
-          width: 100%;
+        
+        body {
           margin: 0;
-          padding: 2rem;
-          background: white;
-          color: black;
-          z-index: 9999;
+          padding: 0;
+          background-color: white !important;
+          color: black !important;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
         }
-        /* Override dark mode for print */
-        .text-slate-300, .text-slate-400 {
-          color: #333 !important;
+
+        /* Hide all UI elements */
+        body > *:not(#root) {
+          display: none;
         }
-        .bg-slate-800, .bg-slate-900 {
-          background-color: #fff !important;
+
+        /* Hide app navigation and other sections */
+        nav, footer, section:not(#invoice-tool), #invoice-tool > div > div > div:first-child, #invoice-tool > div > div > div:nth-child(2) {
+            display: none !important;
         }
-        .border-slate-700 {
-          border-color: #ddd !important;
+        
+        /* Specifically target the preview within the React app structure */
+        #root, #invoice-tool, .container, .max-w-4xl {
+            width: 100% !important;
+            max-width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            background: transparent !important;
+            position: static !important;
+            display: block !important;
+            height: auto !important;
+            overflow: visible !important;
+        }
+
+        /* Ensure the preview div is the only thing visible and formatted correctly */
+        #invoice-preview {
+          display: block !important;
+          visibility: visible !important;
+          position: relative !important;
+          width: 100% !important;
+          max-width: 100% !important;
+          min-height: auto !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          box-shadow: none !important;
+          background: white !important;
+          border: none !important;
+        }
+
+        /* Hide the parent containers of the preview to avoid whitespace issues */
+        #invoice-tool {
+            background-color: white !important;
+        }
+        
+        /* Typography optimizations for print */
+        h1, h2, h3, p, td, th, span, div {
+            color: #000 !important; /* Force black text */
+        }
+
+        /* Table styling */
+        table {
+            width: 100% !important;
+            border-collapse: collapse !important;
+            font-size: 11pt !important;
+        }
+        
+        th {
+            background-color: #f3f4f6 !important; /* Light gray for headers */
+            border-bottom: 2px solid #000 !important;
+            padding-top: 8px !important;
+            padding-bottom: 8px !important;
+        }
+
+        td {
+            border-bottom: 1px solid #ddd !important;
+            padding-top: 8px !important;
+            padding-bottom: 8px !important;
+        }
+        
+        /* Utility overrides */
+        .print\:hidden {
+            display: none !important;
+        }
+        
+        .print\:text-black {
+            color: black !important;
+        }
+        
+        /* Ensure background colors (like striping) print if desired, or remove them */
+        .bg-slate-50, .bg-slate-100, .bg-slate-200 {
+            background-color: #f9fafb !important;
         }
       }
     </style>
