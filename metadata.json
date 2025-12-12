@@ -1,0 +1,5 @@
+{
+  "name": "HR Crew Productions",
+  "description": "A responsive single-page application for a music and video production studio featuring services, portfolio, team, contact form, and a built-in client invoice/quotation generator.",
+  "requestFramePermissions": []
+}
